@@ -3,6 +3,7 @@ let matchedPairs = 0;
 let cardOne, cardTwo;
 let disableDeck = false;
 const reset = document.querySelector(".btn");
+const matched = document.querySelector(".matched");
 
 
     function flipCard(evt) {
@@ -37,7 +38,10 @@ const reset = document.querySelector(".btn");
         cards.forEach((card, i) => { // loop over the set of cards. For each `card`...
             card.classList.remove("flip"); // remove the 'flip' class
             let imgTag = card.querySelector(".back-view img"); // find the back-view image tag by querying all the childNodes of the current card element for the '.back-view img' CSS selector
-            imgTag.src = `images/img-${arr[i]}.png`; // set the value of the src attribute on the current imgTag to a numbered filename based on our randomized array
+            imgTag.src = `images/img-${arr[i]}.png`;
+            console.log(card);
+            console.log(i++);
+             // set the value of the src attribute on the current imgTag to a numbered filename based on our randomized array
             card.addEventListener("click", flipCard); // add a click event listener to the current card to execute a function `flipCard` when clicked
         });
     }
@@ -47,6 +51,8 @@ const reset = document.querySelector(".btn");
     function matchCards(img1, img2) {
         if (img1 === img2) { // this code will run if the card images match
             matchedPairs++; // if the card images match, we can increment the global `matchedPairs` variable by 1 match
+            matched.innerHTML = `<span class="matched">${matchedPairs} pairs matched </span>`
+            console.log(matchedPairs);
             if (matchedPairs == 8) { // if your number of matches is 8, you've made all the matches! Game Won!
                 console.log('YOU WIN!');
                 return; // for now, lets call this game over, end this function and do nothing else.
